@@ -255,10 +255,11 @@ const Register = () => {
               />
               <button
                 type="button"
+                
                 className="mt-2 md:mt-0 lg:mt-0 w-full bg-red-600 text-white py-2 rounded"
                 onClick={() => handleRemoveMember(index)}
               >
-                Remove Member
+                 Remove Member
               </button>
             </div>
           </div>
@@ -291,7 +292,7 @@ const Register = () => {
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <button 
-              
+
                 disabled={!isFormValid}
                 className={`mt-4 bg-green-500 text-white py-2 px-6 rounded ${
                   !isFormValid ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"
