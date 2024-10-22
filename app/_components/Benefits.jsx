@@ -49,7 +49,7 @@ function Benefits({ startingFeatures }) {
         >
         
             <Image
-              src={"/1.jpeg"}
+              src={"/skill2.png"}
               width={1000}
               height={1000}
               alt="get-started"
@@ -60,7 +60,7 @@ function Benefits({ startingFeatures }) {
         </motion.div>
         <motion.div
           variants={fadeIn("left", "tween", 0.2, 1)}
-          className="flex-[0.75] flex bg-white p-6 rounded-xl bg-opacity-10  backdrop-blur-md justify-center flex-col"
+          className="flex-[0.75] flex bg-white p-8 rounded-xl bg-opacity-10  backdrop-blur-md justify-center flex-col"
         >
           <TypingText title="| BENEFITS" />
           {/* <SparklesPreview 

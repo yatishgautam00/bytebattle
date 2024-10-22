@@ -12,7 +12,7 @@ const StartSteps = ({ number, text }) => {
         </div>
         
         {/* Rest of the text */}
-        <p className="font-normal text-md md:text-lg justify-center text-[#B0B0B0] leading-[32px]">
+        <p className="font-normal text-md md:text-lg justify-center text-slate-200 leading-[32px]">
           {restOfText}
         </p>
       </div>
