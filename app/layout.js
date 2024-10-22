@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "./_components/Header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,7 +23,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <section className="bg-image-section">
-          <div className="content-wrapper flex flex-col py-10 h-full w-full px-4 justify-center items-center">
+          <Header />
+          <div className="content-wrapper h-full w-full px-4 justify-center items-center">
             {children}
           </div>
         </section>

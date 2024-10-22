@@ -110,9 +110,9 @@ const Register = () => {
       }, [teamLeader, teamMembers]);
 
   return (
-    <div className="max-w-lg mx-auto p-6 backdrop-blur-md bg-white bg-opacity-10 shadow-2xl rounded-lg text-white md:max-w-2xl lg:max-w-4xl">
+    <div className="max-w-lg mx-auto my-10 p-6 backdrop-blur-md bg-white bg-opacity-10 shadow-2xl rounded-lg text-white md:max-w-2xl lg:max-w-4xl">
       <h2 className="text-4xl font-extrabold mb-6 text-center text-yellow-300">
-        Hackathon Registration
+        ByteBattle Registration
       </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -301,16 +301,16 @@ const Register = () => {
                 Submit Registration
               </button>
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className='backdrop-blur-md bg-white bg-opacity-10 border-yellow-400'>
               <AlertDialogHeader>
-                <AlertDialogTitle>Confirm Submission</AlertDialogTitle>
-                <AlertDialogDescription>
+                <AlertDialogTitle className='text-white text-xl'>Confirm Submission</AlertDialogTitle>
+                <AlertDialogDescription className='text-slate-300 text-lg'>
                   Are you sure you want to submit this registration?
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleSubmit} className='bg-green-500 hover:bg-green-400'>
+                <AlertDialogCancel className='text-red-400 border-red-500 hover:border-red-700 hover:text-red-700 hover:bg-transparent bg-transparen'>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleSubmit} className='bg-green-500 text-white   text-md hover:bg-green-400'>
                   Confirm
                 </AlertDialogAction>
               </AlertDialogFooter>
