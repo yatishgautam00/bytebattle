@@ -6,8 +6,8 @@ function Header() {
     <nav className="border-gray-200 backdrop-blur-md bg-white bg-opacity-10 dark:border-gray-700">
       <div className="max-w-screen-xl flex flex-row items-center justify-between mx-auto p-4">
         <Link href="#" className="flex items-center ">
-          <span className="self-center md:text-3xl text-3xl font-mono  font-semibold whitespace-nowrap text-yellow-500">
-            ByteBattle
+          <span className="self-center roboto-slab md:text-3xl text-3xl font-mono  font-semibold whitespace-nowrap text-yellow-500">
+            Byte Battle
           </span>
         </Link>
 

@@ -112,7 +112,7 @@ const Register = () => {
   return (
     <div className="max-w-lg mx-auto my-10 p-6 backdrop-blur-md bg-white bg-opacity-10 shadow-2xl rounded-lg text-white md:max-w-2xl lg:max-w-4xl">
       <h2 className="text-4xl font-extrabold mb-6 text-center text-yellow-300">
-        ByteBattle Registration
+        Byte Battle Registration
       </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
