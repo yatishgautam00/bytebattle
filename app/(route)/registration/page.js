@@ -290,7 +290,8 @@ const Register = () => {
         <div className="text-center">
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <button
+              <button 
+              
                 disabled={!isFormValid}
                 className={`mt-4 bg-green-500 text-white py-2 px-6 rounded ${
                   !isFormValid ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"
