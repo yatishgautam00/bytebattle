@@ -63,7 +63,7 @@ const Register = () => {
           });
     
           alert("Registration successful!");
-          router.push("/success");
+          router.push("/");
         } catch (error) {
           console.error("Error saving registration:", error);
           alert("Failed to register. Please try again.");
