@@ -93,7 +93,7 @@ const Register = () => {
         const isContactValid = validateContact(teamLeader.contact);
     
         setErrors({
-          email: isEmailValid ? "" : "Invalid email format",
+          email: isEmailValid ? "" : "Valid email format",
           contact: isContactValid ? "" : "Contact must be 10 digits",
         });
     
@@ -255,7 +255,7 @@ const Register = () => {
               />
               <button
                 type="button"
-                
+
                 className="mt-2 md:mt-0 lg:mt-0 w-full bg-red-600 text-white py-2 rounded"
                 onClick={() => handleRemoveMember(index)}
               >
