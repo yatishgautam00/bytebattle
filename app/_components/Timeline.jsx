@@ -64,7 +64,7 @@ export function TimelineDemo() {
             coding. Teams should collaborate effectively, seek feedback from
             peers and mentors, and refine their prototypes. As the deadline
             approaches, prepare final presentations to communicate your
-            projects' value to the judges and showcase your creativity!
+            projects&lsquo; value to the judges and showcase your creativity!
           </div>
         </div>
       ),
@@ -98,7 +98,7 @@ export function TimelineDemo() {
               functionality.
             </div>
             <div className="flex gap-2 items-center text-slate-100 dark:text-neutral-300 text-xs md:text-sm">
-              ✅ Teams must clearly articulate their project's objectives, key
+              ✅ Teams must clearly articulate their project&lsquo;s objectives, key
               features, and overall impact, captivating the judges throughout
               their presentation.
             </div>
