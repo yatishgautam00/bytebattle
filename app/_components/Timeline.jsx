@@ -15,7 +15,7 @@ export function TimelineDemo() {
               <span>Dates:</span>
               <span className="text-lg md:text-2xl mb-4 text-yellow-400 dark:text-white ">
                 {" "}
-                22-10-2024 to 12-11-2024
+                22-10-2024 to 10-11-2024
               </span>
             </span>
           </p>
@@ -70,7 +70,7 @@ export function TimelineDemo() {
       ),
     },
     {
-      title: "Evaluation Day (12-11-2024)",
+      title: "Evaluation Day",
       content: (
         <div>
           <p className="text-yellow-400 dark:text-neutral-100 text-xs md:text-sm font-normal mb-4">
