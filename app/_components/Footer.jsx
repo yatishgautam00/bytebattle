@@ -6,7 +6,7 @@ function Footer() {
     <footer className="bg-white  backdrop-blur-md bg-opacity-10">
       <div className="mx-auto max-w-5xl px-4 text-white py-16 sm:px-6 lg:px-8">
         <div className="flex justify-center ">
-        <h2 className='text-3xl'>Byte Battle</h2>
+        <h2 className='text-3xl roboto-slab text-yellow-500'>Byte Battle</h2>
         </div>
 
         <p className="mx-auto mt-6 max-w-xl text-center leading-relaxed text-slate-200">
