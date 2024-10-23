@@ -17,97 +17,96 @@ import {
 } from "@/components/ui/alert-dialog"; // Adjust the import path
 
 const Register = () => {
-    const [teamLeader, setTeamLeader] = useState({
-        name: "",
-        contact: "",
-        email: "",
-        branch: "",
-        semester: "",
+  const [teamLeader, setTeamLeader] = useState({
+    name: "",
+    contact: "",
+    email: "",
+    branch: "",
+    semester: "",
+  });
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [projectTitle, setProjectTitle] = useState("Project Title");
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [errors, setErrors] = useState({ email: "", contact: "" });
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const maxParticipants = 4;
+  const [successDialog, setSuccessDialog] = useState(false);
+  const handleAddMember = () => {
+    if (teamMembers.length < maxParticipants - 1) {
+      setTeamMembers([
+        ...teamMembers,
+        { name: "", branch: "", email: "", semester: "" },
+      ]);
+    }
+  };
+
+  const handleRemoveMember = (index) => {
+    setTeamMembers(teamMembers.filter((_, idx) => idx !== index));
+  };
+
+  const handleMemberChange = (index, field, value) => {
+    const updatedMembers = [...teamMembers];
+    updatedMembers[index][field] = value;
+    setTeamMembers(updatedMembers);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true); // Set loading state to true
+
+    try {
+      await addDoc(collection(db, "registrations"), {
+        teamLeader,
+        teamMembers,
+        projectTitle,
+        timestamp: new Date(),
       });
-      const [teamMembers, setTeamMembers] = useState([]);
-      const [projectTitle, setProjectTitle] = useState("Project Title");
-      const [isFormValid, setIsFormValid] = useState(false);
-      const [errors, setErrors] = useState({ email: "", contact: "" });
-      const router = useRouter();
-    
-      const maxParticipants = 4;
-    
-      const handleAddMember = () => {
-        if (teamMembers.length < maxParticipants - 1) {
-          setTeamMembers([
-            ...teamMembers,
-            { name: "", branch: "", email: "", semester: "" },
-          ]);
-        }
-      };
-    
-      const handleRemoveMember = (index) => {
-        setTeamMembers(teamMembers.filter((_, idx) => idx !== index));
-      };
-    
-      const handleMemberChange = (index, field, value) => {
-        const updatedMembers = [...teamMembers];
-        updatedMembers[index][field] = value;
-        setTeamMembers(updatedMembers);
-      };
-    
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-    
-        try {
-          await addDoc(collection(db, "registrations"), {
-            teamLeader,
-            teamMembers,
-            projectTitle,
-            timestamp: new Date(),
-          });
-    
-          alert("Registration successful!");
-          router.push("/");
-        } catch (error) {
-          console.error("Error saving registration:", error);
-          alert("Failed to register. Please try again.");
-        }
-      };
-    
-      const validateEmail = (email) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-      };
-    
-      const validateContact = (contact) => {
-        const contactRegex = /^\d{10}$/;
-        return contactRegex.test(contact);
-      };
-    
-      const validateForm = () => {
-        const isTeamLeaderValid = Object.values(teamLeader).every(
-          (value) => value.trim() !== ""
-        );
-    
-        const areMembersValid = teamMembers.every((member) =>
-          Object.values(member).every((value) => value.trim() !== "")
-        );
-    
-        const isEmailValid = validateEmail(teamLeader.email);
-        const isContactValid = validateContact(teamLeader.contact);
-    
-        setErrors({
-          email: isEmailValid ? "" : "Valid email format",
-          contact: isContactValid ? "" : "Contact must be 10 digits",
-        });
-    
-        setIsFormValid(
-          isTeamLeaderValid &&
-          areMembersValid &&
-          isEmailValid &&
-          isContactValid
-        );
-      };
-    
-      useEffect(() => {
-        validateForm();
-      }, [teamLeader, teamMembers]);
+
+      setSuccessDialog(true); // Show success dialog instead of alert
+    } catch (error) {
+      console.error("Error saving registration:", error);
+      alert("Failed to register. Please try again.");
+    } finally {
+      setIsLoading(false); // Set loading state to false after submission is complete
+    }
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateContact = (contact) => {
+    const contactRegex = /^\d{10}$/;
+    return contactRegex.test(contact);
+  };
+
+  const validateForm = () => {
+    const isTeamLeaderValid = Object.values(teamLeader).every(
+      (value) => value.trim() !== ""
+    );
+
+    const areMembersValid = teamMembers.every((member) =>
+      Object.values(member).every((value) => value.trim() !== "")
+    );
+
+    const isEmailValid = validateEmail(teamLeader.email);
+    const isContactValid = validateContact(teamLeader.contact);
+
+    setErrors({
+      email: isEmailValid ? "" : "Valid email format",
+      contact: isContactValid ? "" : "Contact must be 10 digits",
+    });
+
+    setIsFormValid(
+      isTeamLeaderValid && areMembersValid && isEmailValid && isContactValid
+    );
+  };
+
+  useEffect(() => {
+    validateForm();
+  }, [teamLeader, teamMembers]);
 
   return (
     <div className="max-w-lg mx-auto my-10 p-6 backdrop-blur-md bg-white bg-opacity-10 shadow-2xl rounded-lg text-white md:max-w-2xl lg:max-w-4xl">
@@ -150,7 +149,7 @@ const Register = () => {
         </div>
 
         <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
+          <div>
             <label className="block font-medium text-yellow-300">
               Contact Number (+91)
             </label>
@@ -255,11 +254,10 @@ const Register = () => {
               />
               <button
                 type="button"
-
                 className="mt-2 md:mt-0 lg:mt-0 w-full bg-red-600 text-white py-2 rounded"
                 onClick={() => handleRemoveMember(index)}
               >
-                 Remove Member
+                Remove Member
               </button>
             </div>
           </div>
@@ -267,7 +265,7 @@ const Register = () => {
         <div className="grid grid-cols-2">
           <button
             type="button"
-            className="bg-yellow-600 col-span-1 text-white py-2 rounded mt-4 hover:bg-yellow-500"
+            className="bg-yellow-600 col-span-1 text-white py-2 rounded mt-4 hover:bg-yellow-500 disabled:bg-gray-500 disabled:text-slate-200 disabled:cursor-not-allowed"
             onClick={handleAddMember}
             disabled={teamMembers.length >= maxParticipants - 1}
           >
@@ -291,33 +289,67 @@ const Register = () => {
         <div className="text-center">
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <button 
-
+              <button
                 disabled={!isFormValid}
                 className={`mt-4 bg-green-500 text-white py-2 px-6 rounded ${
-                  !isFormValid ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"
+                  !isFormValid
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-green-600"
                 }`}
               >
                 Submit Registration
               </button>
             </AlertDialogTrigger>
-            <AlertDialogContent className='backdrop-blur-md bg-white bg-opacity-10 border-yellow-400'>
+            <AlertDialogContent className="backdrop-blur-md bg-white bg-opacity-10 border-yellow-400">
               <AlertDialogHeader>
-                <AlertDialogTitle className='text-white text-xl'>Confirm Submission</AlertDialogTitle>
-                <AlertDialogDescription className='text-slate-300 text-lg'>
+                <AlertDialogTitle className="text-white text-xl">
+                  Confirm Submission
+                </AlertDialogTitle>
+                <AlertDialogDescription className="text-slate-300 text-lg">
                   Are you sure you want to submit this registration?
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel className='text-red-400 border-red-500 hover:border-red-700 hover:text-red-700 hover:bg-transparent bg-transparen'>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleSubmit} className='bg-green-500 text-white   text-md hover:bg-green-400'>
-                  Confirm
+                <AlertDialogCancel className="text-red-400 border-red-500 hover:border-red-700 hover:text-red-700 hover:bg-transparent bg-transparen">
+                  Cancel
+                </AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={handleSubmit}
+                  className={`bg-green-500 text-white   text-md hover:bg-green-400 ${
+                    isLoading && "bg-green-700 text-gray-300 cursor-not-allowed"
+                  }`}
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Submitting..." : "Confirm"}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </div>
       </form>
+      <AlertDialog open={successDialog} onOpenChange={setSuccessDialog}>
+        <AlertDialogContent className="backdrop-blur-md bg-white bg-opacity-10 border-yellow-400">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-white text-xl">
+              Registration Successful
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-slate-300 text-lg">
+              Your registration has been submitted successfully!
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction
+              onClick={() => {
+                setSuccessDialog(false);
+                router.push("/");
+              }}
+              className="bg-green-500 text-white text-md hover:bg-green-400"
+            >
+              Okay
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
